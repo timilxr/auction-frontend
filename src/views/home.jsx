@@ -18,7 +18,7 @@ const Home = () => {
         try {
             await axios.get('https://auctionner.herokuapp.com/products')
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     // if (!res.data.success) {
                     //     console.log(res.data.message);
                     //     // console.log('me');
@@ -28,7 +28,7 @@ const Home = () => {
                     // }
 
                     // setColor('success');
-                    console.log(res.data)
+                    // console.log(res.data)
                     setProducts(res.data);
                 })
                 .catch(err => {

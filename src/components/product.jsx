@@ -17,19 +17,19 @@ const Product = ({ data, user, trigger, ...props }) => {
                 [name]: value,
             }
         });
-        console.log(value);
+        // console.log(value);
         // console.log(e);
     }
 
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(inputData);
+        // console.log(inputData);
         try {
             // let user = null;
             axios.post('https://auctionner.herokuapp.com/bids/', inputData)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     
                     // setLocUser(res.data.user);
                     setColor('success');

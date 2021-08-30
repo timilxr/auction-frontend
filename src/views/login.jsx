@@ -24,25 +24,25 @@ const Login = () => {
                 [name]: value,
             }
         });
-        console.log(value);
+        // console.log(value);
         // console.log(e);
     }
 
     useEffect(()=>{
-        console.log(locUser);
+        // console.log(locUser);
         locUser && history.push('/home');
     }, [user]);
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(data);
+        // console.log(data);
         try {
             // let user = null;
             axios.post('https://auctionner.herokuapp.com/users/login', data)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     if (!res.data.success) {
-                        console.log(res.data.message);
+                        // console.log(res.data.message);
                         setColor('danger');
                         setResMessage(res.data.message);
                     }

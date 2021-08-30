@@ -22,7 +22,7 @@ const AddProduct = ({user, trigger, props }) => {
                 [name]: value,
             }
         });
-        console.log(value);
+        // console.log(value);
         // console.log(e);
     }
 
@@ -40,12 +40,12 @@ const AddProduct = ({user, trigger, props }) => {
         }
         formData.append('image', selectedFile);
         e.preventDefault();
-        console.log(formData);
+        // console.log(formData);
         try {
             // let user = null;
             axios.post('https://auctionner.herokuapp.com/products/', formData)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
 
                     // setLocUser(res.data.user);
                     setColor('success');

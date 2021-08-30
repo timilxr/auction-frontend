@@ -22,7 +22,7 @@ const Dashboard = () => {
         try {
             await axios.post(`https://auctionner.herokuapp.com/bids/accept/`, prod)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setTrigger(res.data);
                 })
                 .catch(err => {
@@ -35,7 +35,7 @@ const Dashboard = () => {
     
     const getUser = async (bid) => {
         // e.preventDefault();
-        console.log(bid);
+        // console.log(bid);
         setBidInfo(bid);
         try {
             await axios.get(`https://auctionner.herokuapp.com/users/${bid.user}`)
@@ -58,7 +58,7 @@ const Dashboard = () => {
         try {
             await axios.get(`https://auctionner.herokuapp.com/products/user/${locUser._id}`)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     setProducts(res.data);
                 })
                 .catch(err => {
@@ -66,7 +66,7 @@ const Dashboard = () => {
                 });
             await axios.get(`https://auctionner.herokuapp.com/bids/user/${locUser._id}`)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     setBids(res.data);
                 })
                 .catch(err => {
@@ -104,7 +104,7 @@ const Dashboard = () => {
                     <div className="col-md-6">
                     <AddProduct user={locUser} data={products[0]} trigger={setTrigger} />
                     </div>
-                    {bidder && <div className="col-md-6 bg-light rounded shadow text-uppercase pt-3">
+                    {bidder && <div className="col-md-6 bg-light rounded shadow text-uppercase pt-3 p-md-0">
                         <h2>Full Name: {bidder.fullName}</h2>
                         <h2>Price: {bidInfo.price}</h2>
                         <p>matric: {bidder.matric}</p>
