@@ -16,6 +16,24 @@ const Dashboard = () => {
     const [resMessage, setResMessage] = useState(null);
     const history = useHistory();
 
+    const deleteItem = async (item, id) => {
+        // e.preventDefault();
+        const API = item === 'product' ? `https://auctionner.herokuapp.com/products/${id}` : `https://auctionner.herokuapp.com/bids/${id}`;
+        // console.log(prod);
+        try {
+            await axios.delete(API)
+                .then(res => {
+                    // console.log(res.data);
+                    setTrigger(res.data);
+                })
+                .catch(err => {
+                    setResMessage(err.message);
+                });
+        } catch (error) {
+            setResMessage(error.message);
+        }
+    }
+
     const closeBid = async (prod) => {
         // e.preventDefault();
         console.log(prod);
@@ -119,7 +137,7 @@ const Dashboard = () => {
                             <h2 className='text-decoration-underline'>My Products</h2>
                         </div>
                         {products.length > 0 ?
-                        <Table data={products} namz='products' closer={closeBid} getUser={getUser} />
+                        <Table data={products} namz='products' removeItem={deleteItem} closer={closeBid} getUser={getUser} />
                     :
                     <h3>No Products yet</h3>}
                     </div>
@@ -127,7 +145,7 @@ const Dashboard = () => {
                         <div className="text-center p-2">
                             <h2 className='text-decoration-underline'>My Bids</h2>
                         </div>
-                    {bids.length > 0 ? <Table data={bids} namz='bids' />
+                    {bids.length > 0 ? <Table data={bids} removeItem={deleteItem} namz='bids' />
                     :
                     <h3>No Bids yet</h3>}
                     </div>

@@ -58,7 +58,7 @@ const Product = ({ data, user, trigger, ...props }) => {
     }
 
     return (
-        <div className={`card ${data.open ? 'bg-success' : 'bg-secondary'}`}>
+        <div className={`card shadow-lg ${data.open ? 'border-success' : 'border-danger'}`}>
             <div className="card-header px-0">
                 <h2>{data.name}</h2>
                 {/* <p className={data.open ? 'text-success' : 'text-danger'}>status: {data.open ? 'open' : 'closed'}</p> */}

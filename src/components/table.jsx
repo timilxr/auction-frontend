@@ -1,6 +1,7 @@
 import React from 'react';
 
-const MyTable = ({ namz, data, closer, getUser, ...props }) => {
+const MyTable = ({ namz, data, closer, removeItem, getUser, ...props }) => {
+    // console.log(data);
     const header = Object.keys(data[0]);
     
     return (
@@ -33,6 +34,10 @@ const MyTable = ({ namz, data, closer, getUser, ...props }) => {
                             {(namz === 'products') && <td>{info.open ? <button type='button' onClick={()=>closer(info)} className='btn btn-sm btn-danger'>close bid</button> :
                             <button type='button' onClick={()=>getUser(info.last_bid)} className='btn btn-sm btn-success'>view highest bidder</button>
                             }</td>}
+                            {/* {(namz === 'products') && <td>{!info.open ? <button type='button' onClick={()=>removeItem('product', info._id)} className='btn btn-sm btn-danger'>delete product</button> : <></>}</td>}
+
+                            {(namz === 'bids') && <td>{(info.status === 'rejected') ? <button type='button' onClick={()=>removeItem('bid', info._id)} className='btn btn-sm btn-danger'>delete bid</button> : <></>
+                            }</td>} */}
                     </tr>}
                     )}
             </tbody>
