@@ -16,7 +16,7 @@ const Home = () => {
         // e.preventDefault();
         // console.log(data);
         try {
-            await axios.get('http://localhost:5000/products')
+            await axios.get('https://auctionner.herokuapp.com/products')
                 .then(res => {
                     console.log(res.data);
                     // if (!res.data.success) {

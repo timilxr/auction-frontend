@@ -20,7 +20,7 @@ const Dashboard = () => {
         // e.preventDefault();
         console.log(prod);
         try {
-            await axios.post(`http://localhost:5000/bids/accept/`, prod)
+            await axios.post(`https://auctionner.herokuapp.com/bids/accept/`, prod)
                 .then(res => {
                     console.log(res.data);
                     setTrigger(res.data);
@@ -38,7 +38,7 @@ const Dashboard = () => {
         console.log(bid);
         setBidInfo(bid);
         try {
-            await axios.get(`http://localhost:5000/users/${bid.user}`)
+            await axios.get(`https://auctionner.herokuapp.com/users/${bid.user}`)
                 .then(res => {
                     console.log(res.data);
                     setBidder(res.data);
@@ -56,7 +56,7 @@ const Dashboard = () => {
         // e.preventDefault();
         // console.log(data);
         try {
-            await axios.get(`http://localhost:5000/products/user/${locUser._id}`)
+            await axios.get(`https://auctionner.herokuapp.com/products/user/${locUser._id}`)
                 .then(res => {
                     console.log(res.data)
                     setProducts(res.data);
@@ -64,7 +64,7 @@ const Dashboard = () => {
                 .catch(err => {
                     setResMessage(err.message);
                 });
-            await axios.get(`http://localhost:5000/bids/user/${locUser._id}`)
+            await axios.get(`https://auctionner.herokuapp.com/bids/user/${locUser._id}`)
                 .then(res => {
                     console.log(res.data)
                     setBids(res.data);

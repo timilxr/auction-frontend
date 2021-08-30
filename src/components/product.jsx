@@ -27,7 +27,7 @@ const Product = ({ data, user, trigger, ...props }) => {
         console.log(inputData);
         try {
             // let user = null;
-            axios.post('http://localhost:5000/bids/', inputData)
+            axios.post('https://auctionner.herokuapp.com/bids/', inputData)
                 .then(res => {
                     console.log(res.data);
                     
