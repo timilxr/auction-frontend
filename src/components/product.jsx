@@ -53,6 +53,9 @@ const Product = ({ data, user, trigger, ...props }) => {
         }
     }
 
+    if(!user){
+        return <h1>Loading...</h1>
+    }
 
     return (
         <div className={`card ${data.open ? 'bg-success' : 'bg-secondary'}`}>
