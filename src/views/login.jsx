@@ -10,6 +10,7 @@ const Login = () => {
     const [locUser, setLocUser] = useLocalStorage('student', null);
     const [user, setUser] = useState(null);
     const history = useHistory();
+    // console.log(new Date('12/1/2021 12:35'));
     // const [errors, setErrors] = useState(null);
     const [color, setColor] = useState(null);
     // {color === 'success' && history.push('/home')}

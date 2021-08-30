@@ -98,6 +98,10 @@ const AddProduct = ({user, trigger, props }) => {
                         <label htmlFor="exampleFormControlInput2">Price</label>
                         <input type="number" name="price" className="form-control" onChange={handleInput} id="exampleFormControlInput2" placeholder="enter your base price" required />
                     </div>
+                    <div className="col-md-6">
+                        <label htmlFor="exampleFormControlInput2">End date</label>
+                        <input type="datetime-local" name="deadline" className="form-control" onChange={handleInput} id="exampleFormControlInput2" placeholder="enter your base price" required />
+                    </div>
                     <div className="col">
                         <label htmlFor="exampleFormControlInput2">Description</label>
                         <textarea name="description" className="form-control" onChange={handleInput} id="exampleFormControlInput2" placeholder="Description of product..." rows='4' cols='50'></textarea>

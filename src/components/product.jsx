@@ -1,13 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import calculateTimeLeft from '../common/calcTimeLeft';
 
 const Product = ({ data, user, trigger, ...props }) => {
     const [open, setOpen] = useState(false);
-    const [inputData, setInputData] = useState({user: user ? user._id : null,
-    product: data._id});
+    const [inputData, setInputData] = useState({
+        user: user ? user._id : null,
+        product: data._id
+    });
     const [color, setColor] = useState(null);
     // {color === 'success' && history.push('/home')}
     const [resMessage, setResMessage] = useState(null);
+
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(data.deadline));
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setTimeLeft(calculateTimeLeft(data.deadline));
+        }, 1000);
+        // Clear timeout if the component is unmounted
+        return () => clearTimeout(timer);
+    });
+    const timerComponents = [];
+
+    Object.keys(timeLeft).forEach((interval) => {
+        if (!timeLeft[interval]) {
+            return;
+        }
+
+        timerComponents.push(
+            <span key={interval}>
+                {timeLeft[interval]} {interval}{" "}
+            </span>
+        );
+    });
+
+
 
     const handleInput = e => {
         const { value, name } = e.target;
@@ -22,6 +50,7 @@ const Product = ({ data, user, trigger, ...props }) => {
     }
 
 
+
     const handleSubmit = e => {
         e.preventDefault();
         // console.log(inputData);
@@ -30,7 +59,7 @@ const Product = ({ data, user, trigger, ...props }) => {
             axios.post('https://auctionner.herokuapp.com/bids/', inputData)
                 .then(res => {
                     // console.log(res.data);
-                    
+
                     // setLocUser(res.data.user);
                     setColor('success');
                     trigger(res.data._id);
@@ -53,14 +82,15 @@ const Product = ({ data, user, trigger, ...props }) => {
         }
     }
 
-    if(!user){
+    if (!user) {
         return <h1>Loading...</h1>
     }
 
     return (
-        <div className={`card shadow-lg ${data.open ? 'border-success' : 'border-danger'}`}>
+        <div className={`card shadow-lg ${timerComponents.length ? 'border-success' : 'border-danger'}`}>
             <div className="card-header px-0">
                 <h2>{data.name}</h2>
+                {timerComponents.length ? timerComponents : <span>Time's up!</span>}
                 {/* <p className={data.open ? 'text-success' : 'text-danger'}>status: {data.open ? 'open' : 'closed'}</p> */}
             </div>
             <div className="card-body px-0">
@@ -77,22 +107,22 @@ const Product = ({ data, user, trigger, ...props }) => {
                 <p className="card-text px-md-2">{data.description}</p>
             </div>
             <div className="card-footer">
-                {data.open ? 
-                <>
-                {(!open && data.open) && <button type='button' className='btn btn-primary btn-sm btn-block' onClick={()=>setOpen(true)}>Bid</button>}
-                {open && 
-                <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="exampleFormControlInput2">Amount</label>
-                    <input type="number" name="price" min={parseFloat(data.last_bid.price)} className="form-control" onChange={handleInput} id="exampleFormControlInput2" placeholder="enter bid amount" required />
-                </div>
-                <div className="text-end">
-                    <button type="submit" className={`btn btn-success mt-3 ml-auto`}>Submit Bid</button>
-                </div>
-            </form>}
-                </>
-            :
-            <p className="text-danger">Closed</p>}
+                {timerComponents.length ?
+                    <>
+                        {(!open && data.open) && <button type='button' className='btn btn-primary btn-sm btn-block' onClick={() => setOpen(true)}>Bid</button>}
+                        {open &&
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <label htmlFor="exampleFormControlInput2">Amount</label>
+                                    <input type="number" name="price" min={parseFloat(data.last_bid.price) + 1} className="form-control" onChange={handleInput} id="exampleFormControlInput2" placeholder="enter bid amount" required />
+                                </div>
+                                <div className="text-end">
+                                    <button type="submit" className={`btn btn-success mt-3 ml-auto`}>Submit Bid</button>
+                                </div>
+                            </form>}
+                    </>
+                    :
+                    <p className="text-danger">Closed</p>}
             </div>
         </div>
     )

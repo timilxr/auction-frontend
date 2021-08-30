@@ -18,28 +18,10 @@ const Home = () => {
         try {
             await axios.get('https://auctionner.herokuapp.com/products')
                 .then(res => {
-                    // console.log(res.data);
-                    // if (!res.data.success) {
-                    //     console.log(res.data.message);
-                    //     // console.log('me');
-                    //     setErrors(res.data.errors);
-                    //     setColor('danger');
-                    //     setResMessage(res.data.message);
-                    // }
-
-                    // setColor('success');
-                    // console.log(res.data)
                     setProducts(res.data);
                 })
                 .catch(err => {
-                    // if (!err.response) {
-                    //     setResMessage(err.message);
-                    // }
-                    // else {
                     setResMessage(err.message);
-                    // setErrors(err.response.data.errors);
-                    // };
-                    // setColor('danger');
                 });
         } catch (error) {
             // console.error(error.message);

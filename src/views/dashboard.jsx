@@ -15,6 +15,8 @@ const Dashboard = () => {
     const [locUser, setLocUser] = useLocalStorage('student', null);
     const [resMessage, setResMessage] = useState(null);
     const history = useHistory();
+    const api = 'https://auctionner.herokuapp.com';
+    const apiTest = 'http://localhost:5000';
 
     const deleteItem = async (item, id) => {
         // e.preventDefault();

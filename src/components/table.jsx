@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 const MyTable = ({ namz, data, closer, removeItem, getUser, ...props }) => {
     // console.log(data);
     const header = Object.keys(data[0]);
+    const [timeLeft, setTimeLeft] = useState(+new Date());
+
+    useEffect(()=>{
+        const timer = setTimeout(() => {
+            setTimeLeft(+new Date());
+        }, 1000);
+        // Clear timeout if the component is unmounted
+        return () => clearTimeout(timer);
+    })
+    
     
     return (
         <div className='table-responsive'>
@@ -17,7 +27,7 @@ const MyTable = ({ namz, data, closer, removeItem, getUser, ...props }) => {
             </thead>
             <tbody>
                 {data.map((info, index) =>{
-                    let class1 = info.open ? 'bg-success' : 'bg-danger';
+                    let class1 = (+new Date(info.deadline) <= timeLeft) ? 'bg-success' : 'bg-danger';
                     let class2 = info.status === 'accepted' ? 'bg-success' : info.status === 'rejected' ? 'bg-danger' : 'bg-light';
                     return <tr key={index} className={namz === 'bids' ? class2 : class1}>
                         <td>{index+1}</td>
@@ -31,8 +41,7 @@ const MyTable = ({ namz, data, closer, removeItem, getUser, ...props }) => {
                             }
                             return <td key={index}>{repo}</td>}
                             )}
-                            {(namz === 'products') && <td>{info.open ? <button type='button' onClick={()=>closer(info)} className='btn btn-sm btn-danger shadow-lg'>close bid</button> :
-                            <button type='button' onClick={()=>getUser('product', info.last_bid)} className='btn btn-sm btn-success shadow-lg'>view highest bidder</button>
+                            {(namz === 'products') && <td>{(+new Date(info.deadline) <= timeLeft) && <button type='button' onClick={()=>getUser('product', info.last_bid)} className='btn btn-sm btn-success shadow-lg'>view highest bidder</button>
                             }</td>}
                             {/* {(namz === 'products') && <td>{!info.open ? <button type='button' onClick={()=>removeItem('product', info._id)} className='btn btn-sm btn-danger'>delete product</button> : <></>}</td>} */}
 
