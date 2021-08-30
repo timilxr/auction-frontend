@@ -31,13 +31,13 @@ const MyTable = ({ namz, data, closer, removeItem, getUser, ...props }) => {
                             }
                             return <td key={index}>{repo}</td>}
                             )}
-                            {(namz === 'products') && <td>{info.open ? <button type='button' onClick={()=>closer(info)} className='btn btn-sm btn-danger'>close bid</button> :
-                            <button type='button' onClick={()=>getUser(info.last_bid)} className='btn btn-sm btn-success'>view highest bidder</button>
+                            {(namz === 'products') && <td>{info.open ? <button type='button' onClick={()=>closer(info)} className='btn btn-sm btn-danger shadow-lg'>close bid</button> :
+                            <button type='button' onClick={()=>getUser('product', info.last_bid)} className='btn btn-sm btn-success shadow-lg'>view highest bidder</button>
                             }</td>}
-                            {/* {(namz === 'products') && <td>{!info.open ? <button type='button' onClick={()=>removeItem('product', info._id)} className='btn btn-sm btn-danger'>delete product</button> : <></>}</td>}
+                            {/* {(namz === 'products') && <td>{!info.open ? <button type='button' onClick={()=>removeItem('product', info._id)} className='btn btn-sm btn-danger'>delete product</button> : <></>}</td>} */}
 
-                            {(namz === 'bids') && <td>{(info.status === 'rejected') ? <button type='button' onClick={()=>removeItem('bid', info._id)} className='btn btn-sm btn-danger'>delete bid</button> : <></>
-                            }</td>} */}
+                            {(namz === 'bids') && <td>{(info.status === 'accepted') ? <button type='button' onClick={()=>getUser('bid', info.product.user)} className='btn btn-sm btn-success shadow-lg'>view product owner</button> : <></>
+                            }</td>}
                     </tr>}
                     )}
             </tbody>

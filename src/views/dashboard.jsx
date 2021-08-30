@@ -51,14 +51,15 @@ const Dashboard = () => {
         }
     }
     
-    const getUser = async (bid) => {
+    const getUser = async (item, bid) => {
         // e.preventDefault();
+        const id = item === 'bid' ? bid : bid.user;
         // console.log(bid);
-        setBidInfo(bid);
+        setBidInfo(id);
         try {
-            await axios.get(`https://auctionner.herokuapp.com/users/${bid.user}`)
+            await axios.get(`https://auctionner.herokuapp.com/users/${id}`)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setBidder(res.data);
                 })
                 .catch(err => {
@@ -145,7 +146,7 @@ const Dashboard = () => {
                         <div className="text-center p-2">
                             <h2 className='text-decoration-underline'>My Bids</h2>
                         </div>
-                    {bids.length > 0 ? <Table data={bids} removeItem={deleteItem} namz='bids' />
+                    {bids.length > 0 ? <Table data={bids} removeItem={deleteItem} getUser={getUser} namz='bids' />
                     :
                     <h3>No Bids yet</h3>}
                     </div>

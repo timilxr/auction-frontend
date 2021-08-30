@@ -8,6 +8,7 @@ const AddProduct = ({user, trigger, props }) => {
     });
     const [selectedFile, setSelectedFile] = useState();
     const [color, setColor] = useState(null);
+    const [loading, setLoading] = useState(false);
     // {color === 'success' && history.push('/home')}
     const [resMessage, setResMessage] = useState(null);
 
@@ -31,9 +32,9 @@ const AddProduct = ({user, trigger, props }) => {
         // console.log(e);
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         const formData = new FormData();
-
+        setLoading(true);
         for(let key in inputData){
             formData.append(key, inputData[key]);
             // console.log(key, inputData[key]);
@@ -43,7 +44,7 @@ const AddProduct = ({user, trigger, props }) => {
         // console.log(formData);
         try {
             // let user = null;
-            axios.post('https://auctionner.herokuapp.com/products/', formData)
+            await axios.post('https://auctionner.herokuapp.com/products/', formData)
                 .then(res => {
                     // console.log(res.data);
 
@@ -67,6 +68,7 @@ const AddProduct = ({user, trigger, props }) => {
             setColor('danger');
             setResMessage(error.message);
         }
+        setLoading(false);
     }
 
 
@@ -79,6 +81,9 @@ const AddProduct = ({user, trigger, props }) => {
                 <form onSubmit={handleSubmit} encType='multipart/form-data'>
                     {resMessage && <div className="p-2 w-100 text-center bg-light">
                         <p className={`lead text-${color}`}>{resMessage}</p>
+                    </div>}
+                    {loading && <div className="p-2 w-100 text-center bg-light">
+                        <p className={`lead text-primary`}>Loading...</p>
                     </div>}
                     <div className="row">
                     <div className="col-md-6">
