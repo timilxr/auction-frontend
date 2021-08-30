@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Product = ({ data, user, trigger, ...props }) => {
     const [open, setOpen] = useState(false);
-    const [inputData, setInputData] = useState({user: user._id,
+    const [inputData, setInputData] = useState({user: user ? user._id : null,
     product: data._id});
     const [color, setColor] = useState(null);
     // {color === 'success' && history.push('/home')}
