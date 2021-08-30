@@ -72,7 +72,8 @@ const Product = ({ data, user, trigger, ...props }) => {
                 </div>}
                 <img src={data.image} className="card-img-top" alt="..." />
                 <h5 className="card-title">{data.name}</h5>
-                <p className="card-subtitle lead"><b>{data.last_bid.price}</b></p>
+                <p className="card-subtitle lead">Price: #<b>{data.last_bid.price}</b></p>
+                <p className='card-text'><b>Description(s)</b></p>
                 <p className="card-text">{data.description}</p>
             </div>
             <div className="card-footer">
