@@ -83,7 +83,7 @@ const Product = ({ data, user, trigger, ...props }) => {
                     <input type="number" name="price" min={parseFloat(data.last_bid.price)} className="form-control" onChange={handleInput} id="exampleFormControlInput2" placeholder="enter bid amount" required />
                 </div>
                 <div className="text-end">
-                    <button type="submit" className={`btn btn-success mt-3 ml-auto`} disabled>Submit Bid</button>
+                    <button type="submit" className={`btn btn-success mt-3 ml-auto`}>Submit Bid</button>
                 </div>
             </form>}
                 </>
