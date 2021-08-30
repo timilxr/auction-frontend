@@ -8,7 +8,7 @@ import Dashboard from './views/dashboard';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App pb-5">
       <Router>
         <Switch>
           <Route exact path='/' component={Login} />

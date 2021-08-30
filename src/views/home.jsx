@@ -72,7 +72,7 @@ const Home = () => {
                     {resMessage && <h1 className='text-center mt-3'>{resMessage}</h1>}
                     {products.length > 0 ?
                         products.map(product =>
-                            <div key={product._id} className="col-6 col-md-3">
+                            <div key={product._id} className="col-6 col-md-3 my-4">
                                 <Product data={product} user={locUser} trigger={setTrigger} />
                             </div>
                         )

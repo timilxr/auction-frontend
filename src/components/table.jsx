@@ -30,9 +30,9 @@ const MyTable = ({ namz, data, closer, getUser, ...props }) => {
                             }
                             return <td key={index}>{repo}</td>}
                             )}
-                            <td>{info.open ? <button type='button' onClick={()=>closer(info)} className='btn btn-sm btn-outline-danger'>close bid</button> :
+                            {(namz === 'products') && <td>{info.open ? <button type='button' onClick={()=>closer(info)} className='btn btn-sm btn-danger'>close bid</button> :
                             <button type='button' onClick={()=>getUser(info.last_bid)} className='btn btn-sm btn-success'>view highest bidder</button>
-                            }</td>
+                            }</td>}
                     </tr>}
                     )}
             </tbody>
